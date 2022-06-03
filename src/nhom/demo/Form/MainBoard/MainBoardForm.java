@@ -13,6 +13,7 @@ import nhom.demo.Form.MainBoard.QuanLyHocPhi.QuanLyHocPhiForm;
 
 import nhom.demo.Form.MainBoard.QuanLySinhVien.QuanLySinhVienFormChinhSua;
 import nhom.demo.Form.MainBoard.QuanLySinhVien.QuanLySinhVienFormThemMoi;
+import nhom.demo.Form.MainBoard.XuatFileExcel.XuatFileExcel;
 
 /**
  *
@@ -24,6 +25,7 @@ public class MainBoardForm extends javax.swing.JFrame {
     QuanLyHocPhiForm quanLyHocPhiForm;
     QuanLySinhVienFormThemMoi quanLySinhVienFormThemMoi;
     QuanLySinhVienFormChinhSua quanLySinhVienFormChinhSua;
+    XuatFileExcel xfe;
 
     /**
      * Creates new form MainBoardForm
@@ -66,6 +68,7 @@ public class MainBoardForm extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         mnuItemCongCu = new javax.swing.JMenu();
+        xuatFileExcel = new javax.swing.JMenuItem();
         mnuGioiThieu = new javax.swing.JMenu();
 
         jMenuItem5.setText("jMenuItem5");
@@ -76,7 +79,6 @@ public class MainBoardForm extends javax.swing.JFrame {
 
         btnDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/nhom/demo/icons/logout-icon-32.png"))); // NOI18N
         btnDangXuat.setText("Đăng xuất");
-        btnDangXuat.setActionCommand("Đăng xuất");
         btnDangXuat.setFocusable(false);
         btnDangXuat.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnDangXuat.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -172,6 +174,15 @@ public class MainBoardForm extends javax.swing.JFrame {
 
         mnuItemCongCu.setText("Công Cụ");
         mnuItemCongCu.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+
+        xuatFileExcel.setText("Xu?t file excel");
+        xuatFileExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xuatFileExcelActionPerformed(evt);
+            }
+        });
+        mnuItemCongCu.add(xuatFileExcel);
+
         mainBoardMenu.add(mnuItemCongCu);
 
         mnuGioiThieu.setText("Giới Thiệu");
@@ -231,6 +242,12 @@ public class MainBoardForm extends javax.swing.JFrame {
     private void btnGioiThieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGioiThieuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGioiThieuActionPerformed
+
+    private void xuatFileExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xuatFileExcelActionPerformed
+        // TODO add your handling code here:
+        this.showFormXuatFile();
+        
+    }//GEN-LAST:event_xuatFileExcelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -313,6 +330,18 @@ public class MainBoardForm extends javax.swing.JFrame {
             tpnMain.setSelectedComponent(quanLySinhVienFormChinhSua);
         }
     }
+    
+    public void showFormXuatFile() {
+        if(xfe == null)
+        {
+            xfe = new XuatFileExcel();
+            ImageIcon icon = new ImageIcon(getClass()
+                    .getResource("/nhom/demo/icons/10207-man-student-light-skin-tone-icon-64.png"));
+
+            tpnMain.addTab("Quan Ly Xuat File", icon, xfe, "Quan Ly Sinh Vien");
+            tpnMain.setSelectedComponent(xfe);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu MnuItemQuanLy;
@@ -335,5 +364,6 @@ public class MainBoardForm extends javax.swing.JFrame {
     private javax.swing.JMenu mnuItemCongCu;
     private javax.swing.JMenu mnuItemHeThong;
     private javax.swing.JTabbedPane tpnMain;
+    private javax.swing.JMenuItem xuatFileExcel;
     // End of variables declaration//GEN-END:variables
 }

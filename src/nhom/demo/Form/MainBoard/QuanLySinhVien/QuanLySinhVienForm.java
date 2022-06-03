@@ -196,9 +196,9 @@ public class QuanLySinhVienForm extends javax.swing.JPanel {
                     .addComponent(btnSearch)
                     .addComponent(btnAdd)
                     .addComponent(jButton3))
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -290,8 +290,11 @@ public class QuanLySinhVienForm extends javax.swing.JPanel {
                 List<SinhVien> result = new ArrayList<>();
                 @Override
                 public void accept(SinhVien sinhVien) {
-                    if(sinhVien.getHoTen().contains(txtName.getText()))
+                    if(sinhVien.getHoTen().contains(txtName.getText().trim()))
+                    {
                         result.add(sinhVien);
+                      
+                    }
                     int n = result.size();
 
                     Object[][] data = new Object[n][6];
@@ -302,27 +305,27 @@ public class QuanLySinhVienForm extends javax.swing.JPanel {
                         {
                             if(j == 0)
                             {
-                                data[i][j] = list.get(i).getMaSv();
+                                data[i][j] = result.get(i).getMaSv();
                             }
                             if(j == 1)
                             {
-                                data[i][j] = list.get(i).getHoTen();
+                                data[i][j] = result.get(i).getHoTen();
                             }
                             if(j == 2)
                             {
-                                data[i][j] = list.get(i).getGioiTinh();
+                                data[i][j] = result.get(i).getGioiTinh();
                             }
                             if(j == 3)
                             {
-                                data[i][j] = list.get(i).getDiaChi();
+                                data[i][j] = result.get(i).getDiaChi();
                             }
                             if(j == 4)
                             {
-                                data[i][j] = list.get(i).getLop();
+                                data[i][j] = result.get(i).getLop();
                             }
                             if(j == 5)
                             {
-                                data[i][j] = list.get(i).getNganh();
+                                data[i][j] = result.get(i).getNganh();
                             }
                         }
                     }
@@ -355,27 +358,27 @@ public class QuanLySinhVienForm extends javax.swing.JPanel {
                         {
                             if(j == 0)
                             {
-                                data[i][j] = list.get(i).getMaSv();
+                                data[i][j] = result.get(i).getMaSv();
                             }
                             if(j == 1)
                             {
-                                data[i][j] = list.get(i).getHoTen();
+                                data[i][j] = result.get(i).getHoTen();
                             }
                             if(j == 2)
                             {
-                                data[i][j] = list.get(i).getGioiTinh();
+                                data[i][j] = result.get(i).getGioiTinh();
                             }
                             if(j == 3)
                             {
-                                data[i][j] = list.get(i).getDiaChi();
+                                data[i][j] = result.get(i).getDiaChi();
                             }
                             if(j == 4)
                             {
-                                data[i][j] = list.get(i).getLop();
+                                data[i][j] = result.get(i).getLop();
                             }
                             if(j == 5)
                             {
-                                data[i][j] = list.get(i).getNganh();
+                                data[i][j] = result.get(i).getNganh();
                             }
                         }
                     }
@@ -409,27 +412,27 @@ public class QuanLySinhVienForm extends javax.swing.JPanel {
                         {
                             if(j == 0)
                             {
-                                data[i][j] = list.get(i).getMaSv();
+                                data[i][j] = result.get(i).getMaSv();
                             }
                             if(j == 1)
                             {
-                                data[i][j] = list.get(i).getHoTen();
+                                data[i][j] = result.get(i).getHoTen();
                             }
                             if(j == 2)
                             {
-                                data[i][j] = list.get(i).getGioiTinh();
+                                data[i][j] = result.get(i).getGioiTinh();
                             }
                             if(j == 3)
                             {
-                                data[i][j] = list.get(i).getDiaChi();
+                                data[i][j] = result.get(i).getDiaChi();
                             }
                             if(j == 4)
                             {
-                                data[i][j] = list.get(i).getLop();
+                                data[i][j] = result.get(i).getLop();
                             }
                             if(j == 5)
                             {
-                                data[i][j] = list.get(i).getNganh();
+                                data[i][j] = result.get(i).getNganh();
                             }
                         }
                     }
@@ -443,48 +446,7 @@ public class QuanLySinhVienForm extends javax.swing.JPanel {
             });
             return;
         }
-        int n = list.size();
-        Object[][] data = new Object[n][6];
-        for (int i= 0;i < n;i++)
-        {
-
-            for (int j = 0;j<6;j++)
-            {
-                if(j == 0)
-                {
-                    data[i][j] = list.get(i).getMaSv();
-                }
-                if(j == 1)
-                {
-                    data[i][j] = list.get(i).getHoTen();
-                }
-                if(j == 2)
-                {
-                    data[i][j] = list.get(i).getGioiTinh();
-                }
-                if(j == 3)
-                {
-                    data[i][j] = list.get(i).getDiaChi();
-                }
-                if(j == 4)
-                {
-                    data[i][j] = list.get(i).getLop();
-                }
-                if(j == 5)
-                {
-                    data[i][j] = list.get(i).getNganh();
-                }
-            }
-        }
-
-        jButton3.setText("Nhập lại");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(data,
-                new String [] {
-                        "MaSV", "Ho Ten", "Gioi Tinh", "Dia Chi", "Lop", "Nganh",
-                }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        showTable();
     }
 
 
