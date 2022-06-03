@@ -278,6 +278,7 @@ public class QuanLySinhVienFormChinhSua extends javax.swing.JPanel {
             sv.setEmail(email);
             sv.setSoTienTrongTK(soTien);
             sv.setGioiTinh(gioiTinh);
+            sv.setSoTinChiDk(0);
             
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i).getMaSv().equals(maSVSelected)) {

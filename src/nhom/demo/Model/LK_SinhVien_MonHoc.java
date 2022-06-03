@@ -10,6 +10,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JOptionPane;
+
 import nhom.demo.Repo.MonHocRepository;
 import nhom.demo.Repo.SinhVienRepository;
 import org.json.simple.JSONArray;
@@ -93,33 +96,37 @@ public class LK_SinhVien_MonHoc {
         }
        
     }
-    public void thanhToan()
+    public boolean thanhToan()
     {
         int totalMoney = 0;
         for (MonHoc monHoc : dsachMon) {
             totalMoney += monHoc.getSoTin()*tienMoiTin;
         }
         
-        if(this.sv.getSoTienTrongTK() > totalMoney){
+        if(this.sv.getSoTienTrongTK() >= totalMoney){
             List<SinhVien> list = (new SinhVienRepository()).readData();
             for (SinhVien sinhVien : list) {
                 if(this.sv.getMaSv().equals(sinhVien.getMaSv()))
                 {
-                    sinhVien.setSoTienTrongTK(this.sv.getSoTienTrongTK()-totalMoney);
+                    sinhVien.setSoTienTrongTK(this.sv.getSoTienTrongTK() - totalMoney);
+                    sinhVien.setSoTinChiDk(0);
                 }
             }
             
             new SinhVienRepository().writeData(list);
-        
+
+            return true;
+        } else {
+            return false;            
         }
     }
     
-    public static void main(String[] args) {
-        LK_SinhVien_MonHoc lksvmh = new LK_SinhVien_MonHoc();
-        System.out.println(lksvmh);
-        
-        lksvmh.thanhToan();
-    }
+//    public static void main(String[] args) {
+//        LK_SinhVien_MonHoc lksvmh = new LK_SinhVien_MonHoc();
+//        System.out.println(lksvmh);
+//        
+//        lksvmh.thanhToan();
+//    }
 
     @Override
     public String toString() {

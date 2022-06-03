@@ -64,7 +64,7 @@ public class SinhVienRepository {
             jsonObject.put("diaChi",sinhVien.getDiaChi());
             jsonObject.put("sdt",sinhVien.getSdt());
             jsonObject.put("email",sinhVien.getEmail());
-            jsonObject.put("soTinChiDk",sinhVien.getSoTienTrongTK());
+            jsonObject.put("soTinChiDk",sinhVien.getSoTinChiDk());
             jsonObject.put("soTienTrongTaiKhoan",sinhVien.getSoTienTrongTK());
 
             mhList.add(jsonObject);
