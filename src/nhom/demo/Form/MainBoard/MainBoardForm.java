@@ -199,8 +199,7 @@ public class MainBoardForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
+    public void hienThiQLSV() {
         if(qlsvf == null)
         {
             qlsvf = new QuanLySinhVienForm();
@@ -209,6 +208,11 @@ public class MainBoardForm extends javax.swing.JFrame {
             tpnMain.addTab("Quan Ly Sinh Vien", icon, qlsvf, "Quan Ly Sinh Vien");
             tpnMain.setSelectedComponent(qlsvf);
         }
+    }
+    
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        hienThiQLSV();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -267,7 +271,8 @@ public class MainBoardForm extends javax.swing.JFrame {
     {
         return tpnMain;
     }
-    public void test() {                                           
+    
+    public void hienThiFormThemMoiSV() {                                           
         // TODO add your handling code here:
          if(quanLySinhVienFormThemMoi == null)
         {
@@ -281,7 +286,7 @@ public class MainBoardForm extends javax.swing.JFrame {
 
         }
     }
-    
+
     public void showQlyHocPhi() {                                           
         // TODO add your handling code here:
          if(quanLyHocPhiForm == null)
@@ -297,11 +302,10 @@ public class MainBoardForm extends javax.swing.JFrame {
         }
     }
 
-    public void showEditForm() {
-        // TODO add your handling code here:
+    public void showEditForm(String maSV) {
         if(quanLySinhVienFormChinhSua == null)
         {
-            quanLySinhVienFormChinhSua = new QuanLySinhVienFormChinhSua();
+            quanLySinhVienFormChinhSua = new QuanLySinhVienFormChinhSua(maSV);
             ImageIcon icon = new ImageIcon(getClass()
                     .getResource("/nhom/demo/icons/10207-man-student-light-skin-tone-icon-64.png"));
 

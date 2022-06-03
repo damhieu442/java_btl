@@ -4,17 +4,66 @@
  */
 package nhom.demo.Form.MainBoard.QuanLySinhVien;
 
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
+import nhom.demo.Form.MainBoard.MainBoardForm;
+import nhom.demo.Model.SinhVien;
+import nhom.demo.Repo.SinhVienRepository;
+
 /**
  *
  * @author hlade
  */
 public class QuanLySinhVienFormChinhSua extends javax.swing.JPanel {
+    List<SinhVien> list = SinhVienRepository.readData();
+
+    private String maSVSelected;
+
+    private void showFormWithData(String maSV) {
+        // get student by id
+        SinhVien oldSV = null;
+        for (SinhVien sinhVien : list) {
+            if (sinhVien.getMaSv().equals(maSV)) {
+                oldSV = sinhVien;
+                break;
+            }
+        }
+
+        // check if student is exist
+        if (oldSV == null) {
+            JOptionPane.showMessageDialog(this, "Sinh viên không tồn tại!");
+            (new MainBoardForm()).hienThiQLSV();
+            return;
+        }
+
+        // show form with old data
+        txtSDT.setText(oldSV.getSdt());
+        txtEmail.setText(oldSV.getEmail());
+        txtDiaChi.setText(oldSV.getDiaChi());
+        txtKhoaHoc.setText(oldSV.getKhoaHoc());
+        txtLop.setText(oldSV.getLop());
+        txtHoTen.setText(oldSV.getHoTen());
+        txtKhoa.setText(oldSV.getNganh());
+        txtSoTien.setText(String.valueOf(oldSV.getSoTienTrongTK()));
+
+        // check gioi tinh
+        if (oldSV.getGioiTinh().equals("Nam")) {
+            rNam.setSelected(true);
+        } else {
+            rNu.setSelected(true);
+        }
+    }
 
     /**
      * Creates new form QuanLySinhVienFormChinhSua
      */
-    public QuanLySinhVienFormChinhSua() {
+    public QuanLySinhVienFormChinhSua(String maSV) {
         initComponents();
+
+        maSVSelected = maSV;
+        showFormWithData(maSV);
     }
 
     /**
@@ -27,37 +76,36 @@ public class QuanLySinhVienFormChinhSua extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtHoTen = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtKhoa = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtSDT = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtLop = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtKhoaHoc = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtDiaChi = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
         btnEdit = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        txtSoTien = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        rNam = new javax.swing.JRadioButton();
+        rNu = new javax.swing.JRadioButton();
 
         jLabel1.setText("Họ Tên :");
 
         jLabel2.setText("Khoa :");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txtKhoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtKhoaActionPerformed(evt);
             }
         });
-
-        jLabel3.setText("Giới Tính :");
 
         jLabel4.setText("SDT :");
 
@@ -70,10 +118,31 @@ public class QuanLySinhVienFormChinhSua extends javax.swing.JPanel {
         jLabel8.setText("Email :");
 
         btnEdit.setText("Sửa");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Thoát");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Số tiền trong tài khoản :");
+
+        jLabel10.setText("Giới Tính :");
+
+        rNam.setText("Nam");
+        rNam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rNamActionPerformed(evt);
+            }
+        });
+
+        rNu.setText("Nu");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -92,19 +161,25 @@ public class QuanLySinhVienFormChinhSua extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addGap(48, 48, 48)
-                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtSoTien, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jTextField3)
-                                    .addComponent(jTextField4)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel4))
+                                        .addGap(27, 27, 27)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtKhoa)
+                                            .addComponent(txtSDT)
+                                            .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(rNam)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(rNu)))
                                 .addGap(50, 50, 50)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
@@ -113,10 +188,10 @@ public class QuanLySinhVienFormChinhSua extends javax.swing.JPanel {
                                     .addComponent(jLabel5))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField5)
-                                    .addComponent(jTextField6)
-                                    .addComponent(jTextField7)
-                                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtLop)
+                                    .addComponent(txtKhoaHoc)
+                                    .addComponent(txtDiaChi)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(36, 36, 36))))
         );
         layout.setVerticalGroup(
@@ -125,31 +200,34 @@ public class QuanLySinhVienFormChinhSua extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtKhoaHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(rNam)
+                        .addComponent(rNu))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7)
+                        .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSoTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEdit)
@@ -158,31 +236,95 @@ public class QuanLySinhVienFormChinhSua extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtKhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKhoaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtKhoaActionPerformed
+
+    private void rNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rNamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rNamActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        
+        // update data
+        String hoTen = txtHoTen.getText();
+        String khoa = txtKhoa.getText();
+        String lop = txtLop.getText();
+        String khoaHoc = txtKhoaHoc.getText();
+        String diaChi = txtDiaChi.getText();
+        String sdt = txtSDT.getText();
+        String email = txtEmail.getText();
+        Long soTien = Long.parseLong(txtSoTien.getText());
+        String gioiTinh = "";
+        if(rNam.isSelected()){
+            gioiTinh = "Nam";
+        } else {
+            gioiTinh = "Nữ";
+        }
+        
+        // check data
+        if(hoTen.equals("") || khoa.equals("") || lop.equals("") || khoaHoc.equals("") || diaChi.equals("") || sdt.equals("") || email.equals("") || soTien.equals("")){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin");
+        } else {
+            // update data
+            SinhVien sv = new SinhVien();
+            sv.setMaSv(maSVSelected);
+            sv.setHoTen(hoTen);
+            sv.setNganh(khoa);
+            sv.setLop(lop);
+            sv.setKhoaHoc(khoaHoc);
+            sv.setDiaChi(diaChi);
+            sv.setSdt(sdt);
+            sv.setEmail(email);
+            sv.setSoTienTrongTK(soTien);
+            sv.setGioiTinh(gioiTinh);
+            
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getMaSv().equals(maSVSelected)) {
+                    list.set(i, sv);
+                    break;
+                }
+            }
+            
+            // show notification
+            JOptionPane.showMessageDialog(this, "Sửa thành công");
+
+            // save to file
+            SinhVienRepository repository = new SinhVienRepository();
+            repository.writeData(list);
+
+            (new MainBoardForm()).hienThiQLSV();
+        }
+            
+        
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        (new MainBoardForm()).hienThiQLSV();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JRadioButton rNam;
+    private javax.swing.JRadioButton rNu;
+    private javax.swing.JTextField txtDiaChi;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtHoTen;
+    private javax.swing.JTextField txtKhoa;
+    private javax.swing.JTextField txtKhoaHoc;
+    private javax.swing.JTextField txtLop;
+    private javax.swing.JTextField txtSDT;
+    private javax.swing.JTextField txtSoTien;
     // End of variables declaration//GEN-END:variables
 }
