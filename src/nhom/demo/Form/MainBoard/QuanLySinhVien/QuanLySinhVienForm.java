@@ -294,7 +294,7 @@ public class QuanLySinhVienForm extends javax.swing.JPanel {
                         result.add(sinhVien);
                     int n = result.size();
 
-                    Object[][] data = new Object[n][5];
+                    Object[][] data = new Object[n][6];
                     for (int i= 0;i < n;i++)
                     {
 
@@ -347,7 +347,7 @@ public class QuanLySinhVienForm extends javax.swing.JPanel {
                         result.add(sinhVien);
                     int n = result.size();
 
-                    Object[][] data = new Object[n][5];
+                    Object[][] data = new Object[n][6];
                     for (int i= 0;i < n;i++)
                     {
 
@@ -401,7 +401,7 @@ public class QuanLySinhVienForm extends javax.swing.JPanel {
                         result.add(sinhVien);
                     int n = result.size();
 
-                    Object[][] data = new Object[n][5];
+                    Object[][] data = new Object[n][6];
                     for (int i= 0;i < n;i++)
                     {
 
@@ -444,7 +444,7 @@ public class QuanLySinhVienForm extends javax.swing.JPanel {
             return;
         }
         int n = list.size();
-        Object[][] data = new Object[n][5];
+        Object[][] data = new Object[n][6];
         for (int i= 0;i < n;i++)
         {
 
@@ -477,7 +477,7 @@ public class QuanLySinhVienForm extends javax.swing.JPanel {
             }
         }
 
-        jButton3.setText("Nh?p l?i");
+        jButton3.setText("Nhập lại");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(data,
                 new String [] {
