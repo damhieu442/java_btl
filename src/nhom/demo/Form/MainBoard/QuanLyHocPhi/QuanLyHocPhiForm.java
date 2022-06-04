@@ -8,8 +8,11 @@ package nhom.demo.Form.MainBoard.QuanLyHocPhi;
 import static com.sun.tools.attach.VirtualMachine.list;
 import static java.util.Collections.list;
 import java.util.List;
+
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import nhom.demo.Form.MainBoard.MainBoardForm;
+import nhom.demo.Model.LK_SinhVien_MonHoc;
 import nhom.demo.Model.SinhVien;
 import nhom.demo.Repo.SinhVienRepository;
 
@@ -19,11 +22,55 @@ import nhom.demo.Repo.SinhVienRepository;
  */
 public class QuanLyHocPhiForm extends javax.swing.JPanel {
     List<SinhVien> list = SinhVienRepository.readData();
+    public static final int TIEN_MOI_TIN = 350;
+    String maSVSelected = "";
+
+    private void showTable() {
+         int n = list.size();
+        Object[][] data = new Object[n][5];
+        for (int i= 0;i < n;i++)
+        {
+
+            for (int j = 0;j<6;j++)
+            {
+                if(j == 0)
+                {
+                    data[i][j] = list.get(i).getMaSv();
+                }
+                else if(j == 1)
+                {
+                    data[i][j] = list.get(i).getHoTen();
+                }
+                else if(j == 2)
+                {
+                    data[i][j] = list.get(i).getLop();
+                }
+                else if(j == 3)
+                {
+                    data[i][j] = list.get(i).getSoTienTrongTK();
+                }
+                else if(j == 4)
+                {
+                    data[i][j] = list.get(i).getSoTinChiDk() * TIEN_MOI_TIN;
+                }
+            }
+        }
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(data,
+                new String [] {
+                        "MaSV", "Họ Tên", "Lớp", "Số tiền trong tk", "Số tiền nợ"
+                }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+    }
+
     /**
      * Creates new form QuanLyHocPhiForm
      */
     public QuanLyHocPhiForm() {
         initComponents();
+        showTable();
     }
 
     /**
@@ -43,6 +90,7 @@ public class QuanLyHocPhiForm extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnSearch = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(798, 376));
 
@@ -55,10 +103,7 @@ public class QuanLyHocPhiForm extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
@@ -82,6 +127,13 @@ public class QuanLyHocPhiForm extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("Thanh toan");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,7 +144,7 @@ public class QuanLyHocPhiForm extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 38, Short.MAX_VALUE)
+                        .addGap(0, 36, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -107,6 +159,10 @@ public class QuanLyHocPhiForm extends javax.swing.JPanel {
                         .addComponent(jButton3)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(40, 40, 40))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(350, 350, 350)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,13 +173,15 @@ public class QuanLyHocPhiForm extends javax.swing.JPanel {
                     .addComponent(txtClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addGap(35, 35, 35)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSearch)
                     .addComponent(jButton3))
-                .addGap(34, 34, 34)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(57, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -132,30 +190,53 @@ public class QuanLyHocPhiForm extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
-        JTable source = (JTable)evt.getSource();
-        int row = source.rowAtPoint( evt.getPoint() );
-
-        String s=source.getModel().getValueAt(row,0)+"";
-        System.out.println(s);
-
-        SinhVien sinhVien = new SinhVien();
-        for (SinhVien sinhVien1 : list) {
-            System.out.println("123");
-            if(sinhVien1.getMaSv().equals(s)) sinhVien = sinhVien1;
-        }
-        System.out.println(sinhVien.getMaSv());
-
-        (new MainBoardForm()).showEditForm();
+        // get maSV selected
+        int row = jTable1.getSelectedRow();
+        maSVSelected = jTable1.getValueAt(row, 0).toString();
+              
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSearchActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // check if maSV selected
+        if (maSVSelected.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Chọn sinh viên cần thanh toán!");
+            return;
+        }
+
+        // confirm thanh toan
+        int confirm = JOptionPane.showConfirmDialog(this, "Thanh toán ngay?");
+        if (confirm == JOptionPane.NO_OPTION) {
+            return;
+        }
+
+        for (SinhVien sinhVien : list) {
+            if (maSVSelected.equals(sinhVien.getMaSv())) {
+                LK_SinhVien_MonHoc lk = new LK_SinhVien_MonHoc();
+                lk.setSv(sinhVien);
+
+                boolean thanhToan = lk.thanhToan();
+
+                if (thanhToan) {
+                    JOptionPane.showMessageDialog(this, "Thanh toán thành công!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Thanh toán thất bại! (kiểm tra lại tiền trong tài khoản)");
+                }
+
+                break;
+            }
+        }
+        
+        showTable();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSearch;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
