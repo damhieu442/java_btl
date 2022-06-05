@@ -13,6 +13,7 @@ import nhom.demo.Form.MainBoard.QuanLyHocPhi.QuanLyHocPhiForm;
 
 import nhom.demo.Form.MainBoard.QuanLySinhVien.QuanLySinhVienFormChinhSua;
 import nhom.demo.Form.MainBoard.QuanLySinhVien.QuanLySinhVienFormThemMoi;
+import nhom.demo.Form.MainBoard.QuanLyTinChi.QuanLyTinChiForm;
 import nhom.demo.Form.MainBoard.XuatFileExcel.XuatFileExcel;
 
 /**
@@ -26,6 +27,7 @@ public class MainBoardForm extends javax.swing.JFrame {
     QuanLySinhVienFormThemMoi quanLySinhVienFormThemMoi;
     QuanLySinhVienFormChinhSua quanLySinhVienFormChinhSua;
     XuatFileExcel xfe;
+    QuanLyTinChiForm qltcf;
 
     /**
      * Creates new form MainBoardForm
@@ -238,6 +240,7 @@ public class MainBoardForm extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
+        showFormQuanLyTinChi();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
@@ -272,38 +275,38 @@ public class MainBoardForm extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainBoardForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainBoardForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainBoardForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainBoardForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainBoardForm().setVisible(true);
-            }
-        });
-    }
-    
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(MainBoardForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(MainBoardForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(MainBoardForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(MainBoardForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new MainBoardForm().setVisible(true);
+//            }
+//        });
+//    }
+//    
     public JTabbedPane getTpnMain()
     {
         return tpnMain;
@@ -360,6 +363,18 @@ public class MainBoardForm extends javax.swing.JFrame {
 
             tpnMain.addTab("Quan Ly Xuat File", icon, xfe, "Quan Ly Sinh Vien");
             tpnMain.setSelectedComponent(xfe);
+        }
+    }
+    
+    public void showFormQuanLyTinChi() {
+        if(qltcf == null)
+        {
+            qltcf = new QuanLyTinChiForm();
+            ImageIcon icon = new ImageIcon(getClass()
+                    .getResource("/nhom/demo/icons/10207-man-student-light-skin-tone-icon-64.png"));
+
+            tpnMain.addTab("Quan Ly Tin Chi", icon, qltcf, "Quan Ly Sinh Vien");
+            tpnMain.setSelectedComponent(qltcf);
         }
     }
 

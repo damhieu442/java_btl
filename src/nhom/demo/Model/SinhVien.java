@@ -129,6 +129,11 @@ public class SinhVien {
     public void setSoTinChiDk(long soTinChiDk) {
         this.soTinChiDk = soTinChiDk;
     }
+
+    @Override
+    public String toString() {
+        return "SinhVien{" + "maSv=" + maSv + ", hoTen=" + hoTen + ", lop=" + lop + ", nganh=" + nganh + ", khoaHoc=" + khoaHoc + ", gioiTinh=" + gioiTinh + ", DiaChi=" + DiaChi + ", sdt=" + sdt + ", email=" + email + ", soTienTrongTK=" + soTienTrongTK + ", soTinChiDk=" + soTinChiDk + '}';
+    }
     
     
 }

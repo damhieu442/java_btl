@@ -68,7 +68,7 @@ public class MonHocRepository {
     }
 
 //    public static void main(String[] args) {
-//        writeData(new MonHoc("MH001","Thiet ke web",12,"phu dep trai","tu luan"));
+//        writeData((List<MonHoc>) new MonHoc("MH001","Thiet ke web",12,"phu dep trai","tu luan"));
 //        System.out.println(readData().toString());
 //    }
 

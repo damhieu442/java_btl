@@ -26,6 +26,7 @@ import org.json.simple.parser.ParseException;
  */
 public class LK_SinhVien_MonHoc {
     private SinhVien sv;
+    private int tongSoTin = 0;
     private List<MonHoc> dsachMon;
     public final int tienMoiTin = 350;
 
@@ -58,6 +59,7 @@ public class LK_SinhVien_MonHoc {
     {
         List<MonHoc> resultMonHocs = new ArrayList<>();
         List<Integer> list = new ArrayList<>();
+        
         JSONParser jsonParser = new JSONParser();
         try(FileReader fileReader = new FileReader("DanhSachDangKyMonHoc.json")) {
             Object obj = jsonParser.parse(fileReader);
@@ -66,26 +68,34 @@ public class LK_SinhVien_MonHoc {
             monhoclis.forEach(mhp -> {
                 SinhVien sinhVien1 = new SinhVien();
                 MonHoc monHoc = new MonHoc();
-                List<SinhVien> listSv = (new SinhVienRepository()).readData();
-                String maSV = ( (String) ((JSONObject) mhp).get("MaSV"));
-                for (SinhVien sinhVien : listSv) {
-                    if(maSV.equals(sinhVien.getMaSv())){
-                        sinhVien1 = sinhVien;
-                        break;
-                    }
-                }
-                this.sv = sinhVien1;
+                
+    
                 List<MonHoc> dsMon = (new MonHocRepository()).readData();
                 String[] dsMaMonHoc = ( (String) ((JSONObject) mhp).get("maMonHoc")).split(",");
                 for (int i = 0; i < dsMaMonHoc.length; i++) {
                     for (MonHoc monHoc1 : dsMon) {
                         if(dsMaMonHoc[i].equals(monHoc1.getMaMonHoc())){
+                           
                             resultMonHocs.add(monHoc1);
+                            tongSoTin += monHoc1.getSoTin();
                             break;
                         }
                     }
                 }
                 this.dsachMon = resultMonHocs;
+                List<SinhVien> listSv = (new SinhVienRepository()).readData();
+                String maSV = ( (String) ((JSONObject) mhp).get("MaSV"));
+                for (SinhVien sinhVien : listSv) {
+                    if(maSV.equals(sinhVien.getMaSv())){
+                        sinhVien1 = sinhVien;
+                        
+                        sinhVien1.setSoTinChiDk(tongSoTin);
+                        break;
+                    }
+                }
+                this.sv = sinhVien1;
+                (new SinhVienRepository()).writeData(listSv);
+                
             });
         } catch (FileNotFoundException e) {
             e.printStackTrace();

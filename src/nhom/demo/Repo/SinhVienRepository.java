@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.compress.harmony.unpack200.bytecode.forms.ThisFieldRefForm;
 
 public class SinhVienRepository {
     public static List<SinhVien> readData()
@@ -49,6 +50,11 @@ public class SinhVienRepository {
         }
         return sinhViens;
     }
+    
+//    public static void main(String[] args) {
+//        List<SinhVien> list = readData();
+//      System.out.println(list.toString());
+//      }
 
     public static void writeData(List<SinhVien> list)
     {
