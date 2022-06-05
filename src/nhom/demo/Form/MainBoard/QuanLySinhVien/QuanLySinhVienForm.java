@@ -283,18 +283,15 @@ public class QuanLySinhVienForm extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
     
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {
-        if(!txtName.getText().isEmpty())
+        if(!txtName.getText().isEmpty() && !txtClass.getText().isEmpty())
         {
             list.forEach(new Consumer<SinhVien>()
             {
                 List<SinhVien> result = new ArrayList<>();
                 @Override
                 public void accept(SinhVien sinhVien) {
-                    if(sinhVien.getHoTen().contains(txtName.getText().trim()))
-                    {
+                    if(sinhVien.getHoTen().contains(txtName.getText()) && sinhVien.getLop().contains(txtClass.getText()))
                         result.add(sinhVien);
-                      
-                    }
                     int n = result.size();
 
                     Object[][] data = new Object[n][6];
@@ -331,7 +328,7 @@ public class QuanLySinhVienForm extends javax.swing.JPanel {
                     }
                     jTable1.setModel(new javax.swing.table.DefaultTableModel(data,
                             new String [] {
-                                    "MaSV", "Ho Ten", "Gioi Tinh", "Dia Chi", "Lop", "Nganh",
+                                "MaSV", "Họ Tên", "Giới Tính", "Địa Chỉ", "Lớp", "Ngành",
                             }
                     ));
                     jScrollPane1.setViewportView(jTable1);
@@ -339,7 +336,55 @@ public class QuanLySinhVienForm extends javax.swing.JPanel {
             });
             return;
         }
-        if(!txtClass.getText().isEmpty())
+
+        else if(!txtName.getText().isEmpty())
+        {
+            list.forEach(new Consumer<SinhVien>() {
+                List<SinhVien> result = new ArrayList<>();
+
+                @Override
+                public void accept(SinhVien sinhVien) {
+                    if (sinhVien.getHoTen().contains(txtName.getText().trim())) {
+                        result.add(sinhVien);
+
+                    }
+                    int n = result.size();
+
+                    Object[][] data = new Object[n][6];
+                    for (int i = 0; i < n; i++) {
+
+                        for (int j = 0; j < 6; j++) {
+                            if (j == 0) {
+                                data[i][j] = result.get(i).getMaSv();
+                            }
+                            if (j == 1) {
+                                data[i][j] = result.get(i).getHoTen();
+                            }
+                            if (j == 2) {
+                                data[i][j] = result.get(i).getGioiTinh();
+                            }
+                            if (j == 3) {
+                                data[i][j] = result.get(i).getDiaChi();
+                            }
+                            if (j == 4) {
+                                data[i][j] = result.get(i).getLop();
+                            }
+                            if (j == 5) {
+                                data[i][j] = result.get(i).getNganh();
+                            }
+                        }
+                    }
+                    jTable1.setModel(new javax.swing.table.DefaultTableModel(data,
+                            new String[] {
+                                    "MaSV", "Ho Ten", "Gioi Tinh", "Dia Chi", "Lop", "Nganh",
+                            }));
+                    jScrollPane1.setViewportView(jTable1);
+                }
+            });
+            return;
+        }
+        
+        else if(!txtClass.getText().isEmpty())
         {
             list.forEach(new Consumer<SinhVien>()
             {
@@ -393,59 +438,7 @@ public class QuanLySinhVienForm extends javax.swing.JPanel {
             });
             return;
         }
-        if(!txtName.getText().isEmpty() && !txtClass.getText().isEmpty())
-        {
-            list.forEach(new Consumer<SinhVien>()
-            {
-                List<SinhVien> result = new ArrayList<>();
-                @Override
-                public void accept(SinhVien sinhVien) {
-                    if(sinhVien.getHoTen().contains(txtName.getText()) && sinhVien.getLop().contains(txtClass.getText()))
-                        result.add(sinhVien);
-                    int n = result.size();
-
-                    Object[][] data = new Object[n][6];
-                    for (int i= 0;i < n;i++)
-                    {
-
-                        for (int j = 0;j<6;j++)
-                        {
-                            if(j == 0)
-                            {
-                                data[i][j] = result.get(i).getMaSv();
-                            }
-                            if(j == 1)
-                            {
-                                data[i][j] = result.get(i).getHoTen();
-                            }
-                            if(j == 2)
-                            {
-                                data[i][j] = result.get(i).getGioiTinh();
-                            }
-                            if(j == 3)
-                            {
-                                data[i][j] = result.get(i).getDiaChi();
-                            }
-                            if(j == 4)
-                            {
-                                data[i][j] = result.get(i).getLop();
-                            }
-                            if(j == 5)
-                            {
-                                data[i][j] = result.get(i).getNganh();
-                            }
-                        }
-                    }
-                    jTable1.setModel(new javax.swing.table.DefaultTableModel(data,
-                            new String [] {
-                                    "MaSV", "Ho Ten", "Gioi Tinh", "Dia Chi", "Lop", "Nganh",
-                            }
-                    ));
-                    jScrollPane1.setViewportView(jTable1);
-                }
-            });
-            return;
-        }
+        
         showTable();
     }
 
